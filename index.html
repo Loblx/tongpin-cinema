@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>同频影院</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">同步观影房间</p>
+        <h1>同频影院</h1>
+      </div>
+      <div class="room-chip" title="当前房间号">
+        <span>房间</span>
+        <strong id="roomCode">TP-0726</strong>
+      </div>
+    </header>
+
+    <section class="layout">
+      <section class="watch-stage" aria-label="观影区">
+        <div class="screen">
+          <img src="./assets/theater-poster.svg" alt="同频影院观影画面" class="poster">
+          <div class="screen-overlay">
+            <div>
+              <p class="eyebrow">正在播放</p>
+              <h2 id="movieTitle">今晚的片单</h2>
+            </div>
+            <button class="icon-button" id="favoriteBtn" title="标记本片">☆</button>
+          </div>
+        </div>
+
+        <div class="progress-block">
+          <div class="time-row">
+            <span id="currentTime">00:12:48</span>
+            <span id="duration">01:48:00</span>
+          </div>
+          <input id="progressRange" class="range" type="range" min="0" max="6480" value="768" aria-label="播放进度">
+        </div>
+
+        <div class="controls" aria-label="播放控制">
+          <button class="control-button" id="backBtn" title="后退15秒">↺ 15s</button>
+          <button class="primary-button" id="playBtn" title="播放或暂停">▶ 播放</button>
+          <button class="control-button" id="forwardBtn" title="前进15秒">15s ↻</button>
+          <button class="control-button" id="syncBtn" title="让所有人同步到房主时间">同步</button>
+        </div>
+      </section>
+
+      <aside class="side-panel" aria-label="房间状态">
+        <section class="panel">
+          <div class="panel-head">
+            <h2>同步状态</h2>
+            <span id="syncBadge" class="status good">同频</span>
+          </div>
+          <div class="stat-grid">
+            <div>
+              <span>房主时间</span>
+              <strong id="hostTime">00:12:48</strong>
+            </div>
+            <div>
+              <span>本机延迟</span>
+              <strong id="latency">+0.18s</strong>
+            </div>
+            <div>
+              <span>在线成员</span>
+              <strong id="memberCount">4</strong>
+            </div>
+            <div>
+              <span>房主模式</span>
+              <strong id="hostMode">开启</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>成员</h2>
+            <button class="small-button" id="copyInviteBtn" title="复制邀请文案">复制邀请</button>
+          </div>
+          <form class="inline-form compact-form" id="identityForm">
+            <input id="viewerName" type="text" placeholder="你的昵称" autocomplete="off">
+            <button type="submit" class="small-button">保存</button>
+          </form>
+          <ul class="member-list" id="memberList"></ul>
+        </section>
+      </aside>
+    </section>
+
+    <section class="workspace">
+      <section class="panel p2p-panel">
+        <div class="panel-head">
+          <h2>直连配对</h2>
+          <span class="muted" id="p2pStatus">未连接</span>
+        </div>
+        <div class="pair-grid">
+          <button class="primary-button" id="createOfferBtn" type="button">我是房主</button>
+          <button class="small-button" id="createAnswerBtn" type="button">我是观众</button>
+        </div>
+        <label class="field-label" for="signalBox">配对码</label>
+        <textarea id="signalBox" class="signal-box" placeholder="房主：点“我是房主”后复制这里发给对象。观众：粘贴房主给你的配对码后点“我是观众”。"></textarea>
+        <div class="pair-grid">
+          <button class="small-button" id="applySignalBtn" type="button">应用对方回应码</button>
+          <button class="small-button" id="copySignalBtn" type="button">复制配对码</button>
+        </div>
+        <div class="notice">
+          GitHub Pages 可稳定托管页面；配对成功后，播放/暂停、拖动进度、片单和聊天通过你们两台设备点对点互通，不经过服务器。
+        </div>
+      </section>
+
+      <section class="panel share-panel">
+        <div class="panel-head">
+          <h2>异地入口</h2>
+          <span class="muted">发给对象</span>
+        </div>
+        <div class="share-box">
+          <label for="shareUrl">房间链接</label>
+          <input id="shareUrl" type="text" readonly>
+          <button class="primary-button" id="copyUrlBtn" type="button">复制链接</button>
+        </div>
+        <div class="notice">
+          打开同一个房间链接后，播放/暂停、拖动进度、片单和聊天会自动互通。若网络波动，页面会自动重试同步。
+        </div>
+      </section>
+
+      <section class="panel queue-panel">
+        <div class="panel-head">
+          <h2>影片队列</h2>
+          <button class="small-button" id="clearQueueBtn" title="清空新增队列">清空</button>
+        </div>
+        <form class="inline-form" id="queueForm">
+          <input id="queueTitle" type="text" placeholder="片名或视频链接" autocomplete="off">
+          <button type="submit" class="primary-button">加入</button>
+        </form>
+        <ul class="queue-list" id="queueList"></ul>
+      </section>
+
+      <section class="panel chat-panel">
+        <div class="panel-head">
+          <h2>同频聊天</h2>
+          <span class="muted">在线互通</span>
+        </div>
+        <div class="chat-log" id="chatLog"></div>
+        <form class="inline-form" id="chatForm">
+          <input id="chatInput" type="text" placeholder="发一句观影弹幕" autocomplete="off">
+          <button type="submit" class="primary-button">发送</button>
+        </form>
+      </section>
+
+      <section class="panel timeline-panel">
+        <div class="panel-head">
+          <h2>房间时间线</h2>
+          <span class="muted" id="saveState">已保存</span>
+        </div>
+        <ol class="timeline" id="timelineList"></ol>
+      </section>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
