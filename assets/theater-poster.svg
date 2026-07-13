@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="同频影院海报">
+  <defs>
+    <linearGradient id="beam" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f4efe5" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#f4efe5" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="#11100d"/>
+  <rect x="80" y="68" width="1440" height="710" rx="20" fill="#211f1a" stroke="#4b4337" stroke-width="6"/>
+  <rect x="132" y="118" width="1336" height="610" rx="12" fill="#080807"/>
+  <path d="M210 180h1180v500H210z" fill="#181512"/>
+  <path d="M210 180l1180 500H210z" fill="url(#beam)"/>
+  <path d="M1390 180L210 680h1180z" fill="#32b6a5" opacity="0.08"/>
+  <g fill="#e24c3b">
+    <circle cx="372" cy="742" r="18"/>
+    <circle cx="430" cy="742" r="18"/>
+    <circle cx="488" cy="742" r="18"/>
+    <circle cx="546" cy="742" r="18"/>
+    <circle cx="604" cy="742" r="18"/>
+  </g>
+  <g fill="#d5a43a">
+    <rect x="312" y="314" width="96" height="190" rx="12"/>
+    <rect x="440" y="250" width="110" height="254" rx="12"/>
+    <rect x="582" y="354" width="96" height="150" rx="12"/>
+  </g>
+  <g fill="#32b6a5">
+    <rect x="922" y="274" width="280" height="42" rx="8"/>
+    <rect x="922" y="350" width="360" height="42" rx="8"/>
+    <rect x="922" y="426" width="230" height="42" rx="8"/>
+  </g>
+  <text x="798" y="806" fill="#f4efe5" font-family="Microsoft YaHei, Arial, sans-serif" font-size="54" text-anchor="middle" letter-spacing="0">同频影院</text>
+  <text x="798" y="852" fill="#b6aa98" font-family="Microsoft YaHei, Arial, sans-serif" font-size="26" text-anchor="middle" letter-spacing="0">一起开场，一起暂停，一起看完</text>
+</svg>
